@@ -1,0 +1,93 @@
+[build-system]
+requires = ["flit_core >=2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "gdrive-task-scheduler"
+authors = [
+    {name = "Ariel Zilbersthein", email = "your-email@example.com"}
+]
+description = "A file-based task scheduler for Google Colab using Google Drive"
+readme = "README.md"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11"
+]
+requires-python = ">=3.8"
+dynamic = ["version"]
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "pytest-cov",
+    "pytest-mock",
+    "flake8",
+    "black",
+    "pylint"
+]
+
+[project.urls]
+Homepage = "https://github.com/ariel-zilber/gdrive-task-scheduler"
+Source = "https://github.com/ariel-zilber/gdrive-task-scheduler"
+Tracker = "https://github.com/ariel-zilber/gdrive-task-scheduler/issues"
+
+[tool.flit.module]
+name = "gdrive_task_scheduler"
+
+[tool.black]
+line-length = 120
+fast = true
+
+[tool.coverage.run]
+branch = true
+
+[tool.coverage.report]
+fail_under = 100
+
+[tool.flake8]
+max-line-length = 120
+select = "F,E,W,B,B901,B902,B903"
+exclude = [
+    ".eggs",
+    ".git",
+    ".tox",
+    "__pycache__",
+    "tests",
+    "dist",
+    "build"
+]
+ignore = [
+    "E722",
+    "B001",
+    "W503",
+    "E203"
+]
+
+[tool.pyright]
+include = ["src"]
+exclude = ["**/__pycache__"]
+venv = ".venv"
+reportMissingImports = true
+reportMissingTypeStubs = false
+pythonVersion = "3.8"
+pythonPlatform = "Linux"
+executionEnvironments = [{ root = "src" }]
+
+[tool.pytest.ini_options]
+addopts = "--cov=src --cov-report=term --cov-fail-under=80"
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.pylint]
+max-line-length = 120
+disable = [
+    "C0114",  # Missing module docstring
+    "C0115",  # Missing class docstring
+    "C0116"   # Missing function or method docstring
+]
